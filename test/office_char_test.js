@@ -29,4 +29,37 @@ describe('When I sign up a character', function(){
         }
     expect(character.signup(dwight)).to.equal(false)
   })
+  it('cannot have input less than 3 characters', function(){
+    var character = new Character()
+    var dwight = {
+      firstName: 'Dwight',
+      lastName: 'Sh'
+    }
+    expect(character.signup(dwight)).to.equal(false)
+  })
+  it('cannot have input more than 25 characters', function() {
+    var character = new Character()
+    var dwight = {
+      firstName: 'Dwight',
+      lastName: 'asasasasasasasasasasasasas'
+    }
+    expect(character.signup(dwight)).to.equal(false)
+  })
+  it('cannot contain numeric input', function(){
+    var character = new Character()
+    var dwight = {
+      firstName: 'Dwight',
+      lastName: 'asasasas23'
+    }
+    expect(character.signup(dwight)).to.equal(false)
+  })
+  it('cannot contain non aphebetical characters', function(){
+    var character = new Character()
+    var dwight = {
+      firstName: 'Dwight',
+      lastName: '@!#$%^&*()_'
+    }
+    expect(character.signup(dwight)).to.equal(false)
+
+  })
 })
