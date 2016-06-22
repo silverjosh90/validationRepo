@@ -42,5 +42,54 @@ describe('When I sign up a character', function(){
     it('fails when the input contains whitespace', function() {
       expect(character.numericEvaluator('12 345')).to.equal(false)
     })
+    it('fails when the input contains special characters', function(){
+      expect(character.numericEvaluator('12@#$@#345')).to.equal(false)
+    })
   })
+  describe('given an object with only alpha properties', function(){
+  	it('should fail if any property is blank', function(){
+      var dwight = {
+        name: ''
+      }
+      expect(character.isValid(dwight)).to.equal(false)
+  	})
+  	it('should pass if all properties are longer than 2 characters', function(){
+      var dwight = {
+        name: 'Dwight',
+        last: 'Shrout'
+      }
+      expect(character.isValid(dwight)).to.equal(true)
+  	})
+    it('fails if either input is invalid', function(){
+      var dwight1 = {
+        name: 'Dwight',
+        last: 'Shr#$#$out'
+      }
+      var dwight2 = {
+        name: 'Dwi  ght',
+        last: 'Shrout'
+      }
+      expect(character.isValid(dwight1)).to.equal(false)
+      expect(character.isValid(dwight2)).to.equal(false)
+    })
+  })
+  describe('given an object with alpha and numeric properties', function(){
+    it('should fail if anything is blank', function(){
+      var dwight = {
+        name: 'Dwight',
+        last: 'Shrout',
+        years: ''
+      }
+      expect(character.isValid(dwight)).to.equal(false)
+    })
+    it('should pass if every property is valid', function(){
+      var dwight = {
+        name: 'Dwight',
+        last: 'Shrout',
+        years: '9'
+      }
+      expect(character.isValid(dwight)).to.equal(true)
+    })
+  })
+
 })

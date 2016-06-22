@@ -6,7 +6,20 @@ class Character {
     }
     numericEvaluator(number) {
       if(!number) return false
-      return !/[a-z A-Z]/.test(number)
+      return !/\D+/.test(number)
+    }
+    isValid(obj) {
+      var array = Object.keys(obj).map(function(key) {
+        return obj[key]
+      });
+      var self = this;
+      return array.reduce(function(prev, curr) {
+        if(prev) {
+          return !/\D+/.test(curr) ? self.numericEvaluator(curr): self.alphaEvaluator(curr)
+        }
+
+        return false
+      }, true)
     }
 }
 
