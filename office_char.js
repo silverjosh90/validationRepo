@@ -1,16 +1,14 @@
 'use strict'
 
 class Character {
-  signup(char) {
-    var properties = Object.keys(char).map(function(val) {
-      return char[val]
-    })
-    var checks = properties.map(function(prop) {
-      return (/[0-9\W]+/g.test(char.lastName) || prop.length < 3 || prop.length > 25)
-    });
-    return checks.indexOf(true) < 0
-
-  }
+    alphaEvaluator(name){
+      return (name.length > 2 && name.length < 25 && !/[0-9\W]/g.test(name))
+    }
+    numericEvaluator(number) {
+      if(!number) return false
+      return !/[a-z A-Z]/.test(number)
+    }
 }
+
 
 module.exports = Character
